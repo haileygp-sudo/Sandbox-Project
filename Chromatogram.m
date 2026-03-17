@@ -47,3 +47,31 @@ function newSampleStruct = removeNoise(sampleData)
 
     newSampleStruct(newSampleStruct < 0) = 0; %any negative values turn positive
 end
+
+
+% find mutations
+function mutations = findMutations(seq1, seq2)
+
+    %find shorter sequence to compare only to that length
+    len = min(length(seq1), length(seq2)); 
+
+    %create arrays to store mutation data
+    mutationIndex = []; % where mutation occurs
+    healthyBase = [];   % original healthy letter
+    patientBase = [];   % mutated letter
+
+    for i = 1:len
+        if seq1(i) ~= seq2(i) % detects mutations
+            mutationIndex(end + 1) = i;
+            healthyBase(end + 1) = seq1(i);
+            patientBase(end + 1) = seq2(i);
+        end
+    end
+
+    % store mutation positions and bases into structure
+    mutations.index = mutationIndex;
+    mutations.healthy = healthyBase;
+    mutations.patient = patientBase;
+    mutations.count = length(mutationIndex);
+end
+
