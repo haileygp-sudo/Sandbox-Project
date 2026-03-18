@@ -2,18 +2,20 @@
 function mutations = findMutations(seq1, seq2)
 
     lend = min(length(seq1), length(seq2));
-    mutationIndex = [];
-    healthyBase = [];
-    patientBase = [];
+   
+    mutationIndex = [];  % stores where mutation is
+    healthyBase = [];    % stores healthy base
+    patientBase = [];    % stores mutated base
 
     for i = 1:len
-        if seq1(i) ~= seq2(i)
+        if seq1(i) ~= seq2(i) % detects mutation
             mutationIndex(end + 1) = i;
             healthyBase(end + 1) = seq1(i);
             patientBase(end + 1) = seq2(i);
         end
     end
  
+    % store mutation data into structure
     mutations.index = mutationIndex;
     mutations.healthy = healthyBase;
     mutations.patient = patientBase;
